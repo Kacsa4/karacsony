@@ -74,7 +74,42 @@ footer {
         text-shadow: 0 0 20px rgba(255,255,255,0.9);
     }
 }
+#lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
 
+#lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.3);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
 .snow {
     position: fixed;
     top: 0;
@@ -97,5 +132,27 @@ footer {
     }
     to {
         background-position: 0 1000px, 0 800px, 0 600px;
+    }
+}
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    p {
+        font-size: 1em;
+        padding: 0 10px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .gallery img {
+        height: 160px;
+        border-radius: 12px;
     }
 }
