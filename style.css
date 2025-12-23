@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#0b3d2e, #145a32);
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* FEJLÉC */
+header {
+    padding: 40px 20px;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    animation: glow 3s ease-in-out infinite;
+}
+
+p {
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* GALÉRIA */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: transform 0.4s, box-shadow 0.4s;
+
+    /* belépő animáció */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* animáció késleltetés */
+.gallery img:nth-child(n) {
+    animation-delay: calc(var(--i, 1) * 0.1s);
+}
+
+.gallery img:hover {
+    transform: scale(1.08) rotate(0.3deg);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+/* LÁBLÉC */
+footer {
+    margin: 40px 0 20px 0;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* ANIMÁCIÓK */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(255,255,255,0.9);
+    }
+}
+
+/* HÓESÉS */
+.snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 2px, transparent 2px),
+        radial-gradient(white 1.5px, transparent 1.5px);
+    background-size: 50px 50px, 100px 100px, 75px 75px;
+    animation: snow 15s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes snow {
+    from {
+        background-position: 0 0, 0 0, 0 0;
+    }
+    to {
+        background-position: 0 1000px, 0 800px, 0 600px;
+    }
+}
