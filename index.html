@@ -47,7 +47,10 @@
     <span class="nav prev" onclick="changeImage(-1)">&#10094;</span>
     <img id="lightbox-img">
     <span class="nav next" onclick="changeImage(1)">&#10095;</span>
+    <div id="counter"></div>
+    <div class="lightbox-snow"></div>
 </div>
+
 
 <div class="snow"></div>
 
@@ -59,10 +62,16 @@ document.addEventListener("DOMContentLoaded", () => {
     images = Array.from(document.querySelectorAll(".gallery img"));
 });
 
+function updateCounter() {
+    document.getElementById("counter").textContent =
+        (currentIndex + 1) + " / " + images.length;
+}
+
 function openLightbox(img) {
     currentIndex = images.indexOf(img);
     document.getElementById("lightbox-img").src = img.src;
     document.getElementById("lightbox").classList.add("active");
+    updateCounter();
 }
 
 function closeLightbox() {
@@ -72,14 +81,11 @@ function closeLightbox() {
 function changeImage(direction) {
     currentIndex += direction;
 
-    if (currentIndex < 0) {
-        currentIndex = images.length - 1;
-    }
-    if (currentIndex >= images.length) {
-        currentIndex = 0;
-    }
+    if (currentIndex < 0) currentIndex = images.length - 1;
+    if (currentIndex >= images.length) currentIndex = 0;
 
     document.getElementById("lightbox-img").src = images[currentIndex].src;
+    updateCounter();
 }
 
 document.addEventListener("keydown", function(e) {
