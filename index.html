@@ -40,18 +40,27 @@
 </section>
 
 <footer>
-    ❤️ Szeretettel készítve a családnak ❤️
+    ❤️ Szeretettel készítve a családnak Donát! ❤️
 </footer>
 
-<div id="lightbox" onclick="closeLightbox()">
+<div id="lightbox">
+    <span class="nav prev" onclick="changeImage(-1)">&#10094;</span>
     <img id="lightbox-img">
+    <span class="nav next" onclick="changeImage(1)">&#10095;</span>
 </div>
 
-<!-- HÓESÉS -->
 <div class="snow"></div>
 
 <script>
+let images = [];
+let currentIndex = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+    images = Array.from(document.querySelectorAll(".gallery img"));
+});
+
 function openLightbox(img) {
+    currentIndex = images.indexOf(img);
     document.getElementById("lightbox-img").src = img.src;
     document.getElementById("lightbox").classList.add("active");
 }
@@ -60,9 +69,53 @@ function closeLightbox() {
     document.getElementById("lightbox").classList.remove("active");
 }
 
+function changeImage(direction) {
+    currentIndex += direction;
+
+    if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+    }
+    if (currentIndex >= images.length) {
+        currentIndex = 0;
+    }
+
+    document.getElementById("lightbox-img").src = images[currentIndex].src;
+}
+
 document.addEventListener("keydown", function(e) {
-    if (e.key === "Escape") {
-        closeLightbox();
+    if (!document.getElementById("lightbox").classList.contains("active")) return;
+
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowRight") changeImage(1);
+    if (e.key === "ArrowLeft") changeImage(-1);
+});
+
+document.getElementById("lightbox").addEventListener("click", function(e) {
+    if (e.target.id === "lightbox") closeLightbox();
+});
+
+let startX = 0;
+let endX = 0;
+
+const lightbox = document.getElementById("lightbox");
+
+lightbox.addEventListener("touchstart", function(e) {
+    startX = e.touches[0].clientX;
+});
+
+lightbox.addEventListener("touchmove", function(e) {
+    endX = e.touches[0].clientX;
+});
+
+lightbox.addEventListener("touchend", function() {
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > 50) { 
+        if (diff > 0) {
+            changeImage(1);
+        } else {
+            changeImage(-1); 
+        }
     }
 });
 </script>
