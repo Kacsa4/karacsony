@@ -12,15 +12,15 @@ header {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 4em;
     margin-bottom: 10px;
     animation: glow 3s ease-in-out infinite;
 }
 
 p {
     max-width: 700px;
-    margin: 0 auto 30px auto;
-    font-size: 1.2em;
+    margin: 0 auto 50px auto;
+    font-size: 1.5em;
     line-height: 1.6;
 }
 .gallery {
@@ -55,7 +55,7 @@ p {
 
 footer {
     margin: 40px 0 20px 0;
-    font-size: 0.9em;
+    font-size: 1.2em;
     opacity: 0.8;
 }
 
